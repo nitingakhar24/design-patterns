@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 4. Use synchronized block in the object creation part in case of multiple thread.
  */
 
-public class LazySnack implements Serializable {
+public class LazySnack implements Serializable, Cloneable {
     private static LazySnack snack;
 
     private LazySnack() {
@@ -35,6 +35,11 @@ public class LazySnack implements Serializable {
 
     @Serial
     public Object readResolve() {
+        return snack;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
         return snack;
     }
 }

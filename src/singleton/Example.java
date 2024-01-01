@@ -32,6 +32,11 @@ public class Example {
         LazySnack deserailizedLazySnack = (LazySnack) ois.readObject();
         System.out.println("After De-Serializing hashcode " + deserailizedLazySnack.hashCode());
 
+        // Logic to Break Singleton pattern using cloning, and it's solution by overriding clone() method
+        LazySnack lazySnack4 = LazySnack.getSnackInstance();
+        System.out.println("Before cloning hashcode " + lazySnack4.hashCode());
+        LazySnack cloneLazySnack = (LazySnack)lazySnack4.clone();
+        System.out.println("After cloning hashcode " + cloneLazySnack.hashCode());
         // Logic to Break Singleton pattern using reflection API and it's solution : If object is there, throw exception from inside constructor.
 
         LazySnack lazySnack1 = LazySnack.getSnackInstance();
