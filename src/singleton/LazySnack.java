@@ -1,5 +1,8 @@
 package singleton;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 1. Private constructor.
  * 2. Create object with the help of a static method.
@@ -7,11 +10,13 @@ package singleton;
  * 4. Use synchronized block in the object creation part in case of multiple thread.
  */
 
-public class LazySnack {
+public class LazySnack implements Serializable {
     private static LazySnack snack;
 
     private LazySnack() {
-
+      if(snack != null) {
+          throw new RuntimeException("Trying to break singleton object");
+      }
     }
 
     // Lazy initialization method
@@ -25,6 +30,11 @@ public class LazySnack {
 
             }
         }
+        return snack;
+    }
+
+    @Serial
+    public Object readResolve() {
         return snack;
     }
 }
